@@ -17,6 +17,7 @@ folder with the one generated on the BeagleBone when running a test.
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import pandas as pd
 
 data0= np.load(os.path.join('MLXStream_Tests','MLXStream_CH0.npy'))
 data1= np.load(os.path.join('MLXStream_Tests','MLXStream_CH1.npy'))
@@ -28,12 +29,14 @@ time_vals= []
 tobj= []
 tamb= []
 tref = []
-
+csv_data = []
+ 
 for i in range(len(data0)):
     time_vals.append(data0[i,2])
     tobj.append(data0[i,0])
     tamb.append(data0[i,1])
     tref.append(data_optocon[i,0])
+
 
 plt.figure(1)
 plt.plot(time_vals, tobj, 'r') 
@@ -41,7 +44,15 @@ plt.plot(time_vals, tamb, 'b')
 plt.plot(time_vals, tref, 'g') 
 plt.xlabel('time (s)')
 plt.ylabel('temperature (c)')
-plt.show()      
+plt.savefig(os.path.join('Output_Files','ch0_data.png'), bbox_inches='tight')
+plt.show()
+plt.close()
+
+
+csv_data = [time_vals,tref,tobj,tamb]
+csv = np.vstack(csv_data)
+df = pd.DataFrame(csv)
+df.to_csv(os.path.join('Output_Files','data_ch0.csv'),index=False)
 
 i = 0
 list.clear(time_vals)
@@ -59,7 +70,14 @@ plt.plot(time_vals, tamb, 'b')
 plt.plot(time_vals, tref, 'g') 
 plt.xlabel('time (s)')
 plt.ylabel('temperature (c)')
+plt.savefig(os.path.join('Output_Files','ch1_data.png'), bbox_inches='tight')
 plt.show()         
+plt.close()
+
+csv_data = [time_vals,tref,tobj,tamb]
+csv = np.vstack(csv_data)
+df = pd.DataFrame(csv)
+df.to_csv(os.path.join('Output_Files','data_ch1.csv'),index=False)
 
 i = 0
 list.clear(time_vals)
@@ -77,7 +95,14 @@ plt.plot(time_vals, tamb, 'b')
 plt.plot(time_vals, tref, 'g') 
 plt.xlabel('time (s)')
 plt.ylabel('temperature (c)')
-plt.show()      
+plt.savefig(os.path.join('Output_Files','ch2_data.png'), bbox_inches='tight') 
+plt.show()     
+plt.close()
+
+csv_data = [time_vals,tref,tobj,tamb]
+csv = np.vstack(csv_data)
+df = pd.DataFrame(csv)
+df.to_csv(os.path.join('Output_Files','data_ch2.csv'),index=False)
 
 i = 0
 list.clear(time_vals)
@@ -95,6 +120,13 @@ plt.plot(time_vals, tamb, 'b')
 plt.plot(time_vals, tref, 'g') 
 plt.xlabel('time (s)')
 plt.ylabel('temperature (c)')
+plt.savefig(os.path.join('Output_Files','ch3_data.png'), bbox_inches='tight')
 plt.show()      
+plt.close()
+
+csv_data = [time_vals,tref,tobj,tamb]
+csv = np.vstack(csv_data)
+df = pd.DataFrame(csv)
+df.to_csv(os.path.join('Output_Files','data_ch3.csv'),index=False)
 
 i = 0
